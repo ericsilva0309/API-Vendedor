@@ -3,7 +3,7 @@ package com.projeto.loja.dto;
  
 import com.projeto.loja.entity.LancamentoVendas;
 
-public class LancamentoVendasResponseDTO {
+public class VendedorResponseDTO {
 	
 	private String data;
 	private Double valor;
@@ -11,13 +11,12 @@ public class LancamentoVendasResponseDTO {
 	
 	
 	
-	public LancamentoVendasResponseDTO(LancamentoVendas lancamento) {
+	public VendedorResponseDTO(LancamentoVendas lancamento) {
 		super();
-		this.data = lancamento.getData() != null ? lancamento.getData().toString() : "Data não disponível";
+		this.data = lancamento.getData().toString();
 		this.valor = lancamento.getValor();
-		this.nomeVendedor = lancamento.getVendedor() != null ? lancamento.getVendedor().getNome() : "Vendedor não disponível";
+		this.nomeVendedor = lancamento.getVendedor().getNome();
 	}
-	
 
 
 

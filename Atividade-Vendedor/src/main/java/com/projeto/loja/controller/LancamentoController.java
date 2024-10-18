@@ -1,6 +1,7 @@
 package com.projeto.loja.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,7 +24,7 @@ import com.projeto.loja.dto.LancamentoVendasResponseDTO;
 import com.projeto.loja.entity.LancamentoVendas;
 import com.projeto.loja.service.LancamentoService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 
 @RestController
 @RequestMapping("/lancamentos")
@@ -46,10 +48,21 @@ public class LancamentoController {
 	
 	@PostMapping
 	public ResponseEntity<Object> inserir(@RequestBody LancamentoVendas lancamento){
+		System.out.println(lancamento);
 		LancamentoVendasRequestDTO dto = service.inserir(lancamento);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(lancamento.getId())
 				.toUri();
 		return ResponseEntity.created(uri).body(dto);
+	}
+	
+	@PostMapping("/varios")
+	public ResponseEntity<List<LancamentoVendasRequestDTO>> inserirVarios(@RequestBody List<LancamentoVendas> lancamentos) {
+		List<LancamentoVendasRequestDTO> dtos = new ArrayList<>();
+		for (LancamentoVendas lancamento : lancamentos) {
+			LancamentoVendasRequestDTO dto = service.inserir(lancamento);
+			dtos.add(dto);
+		}
+		return ResponseEntity.status(201).body(dtos);
 	}
 	
 	@GetMapping("/paginacao")

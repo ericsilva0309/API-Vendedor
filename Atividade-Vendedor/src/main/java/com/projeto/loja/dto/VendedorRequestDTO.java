@@ -4,26 +4,12 @@ import java.time.LocalDate;
 
 import com.projeto.loja.entity.LancamentoVendas;
 
-public class LancamentoVendasRequestDTO {
+public class VendedorRequestDTO {
 
 	private Long id;
 	private LocalDate data;
 	private Double valor;
-	private Long vendedorId;
-	
-	public Long getVendedorId() {
-		return vendedorId;
-	}
-
-
-
-	public void setVendedorId(Long vendedorId) {
-		this.vendedorId = vendedorId;
-	}
-
-
-
-	public LancamentoVendasRequestDTO(LancamentoVendas lancamento) {
+	public VendedorRequestDTO(LancamentoVendas lancamento) {
 		super();
 		this.id = lancamento.getId();
 		this.data = lancamento.getData();

@@ -23,6 +23,7 @@ public class LancamentoService {
 	
 	public List<LancamentoVendasResponseDTO> listar() {
 		List<LancamentoVendas> lancamentos = repository.findAll();
+		System.out.println(lancamentos);
 		List<LancamentoVendasResponseDTO> dtos = new ArrayList<>();
 		for (LancamentoVendas lancamento : lancamentos) {
 			dtos.add(new LancamentoVendasResponseDTO(lancamento));
@@ -34,14 +35,24 @@ public class LancamentoService {
 		return repository.findById(id);
 	}
 	
+//	public LancamentoVendasRequestDTO inserir(LancamentoVendas lancamento) {
+//		Optional<LancamentoVendas> lancamentoExistente = repository.findById(lancamento.getId());
+//		if(lancamentoExistente.isPresent()) {
+//			throw new LancamentoException("Lancamento já existente!");
+//		}
+//		lancamento = repository.save(lancamento);
+//		return new LancamentoVendasRequestDTO(lancamento);	
+//	}
+	
 	public LancamentoVendasRequestDTO inserir(LancamentoVendas lancamento) {
-		Optional<LancamentoVendas> lancamentoExistente = repository.findById(lancamento.getId());
-		if(lancamentoExistente.isPresent()) {
-			throw new LancamentoException("Lancamento já existente!");
-		}
-		lancamento = repository.save(lancamento);
-		return new LancamentoVendasRequestDTO(lancamento);	
+	    if (lancamento.getId() != null) {
+	        throw new LancamentoException("ID deve ser nulo para novos lançamentos!");
+	    }
+	    System.out.println(lancamento);
+	    lancamento = repository.save(lancamento);
+	    return new LancamentoVendasRequestDTO(lancamento);
 	}
+
 	
     public Page<LancamentoVendas> listarPorPagina(Pageable pageable) {
         return repository.findAll(pageable);
