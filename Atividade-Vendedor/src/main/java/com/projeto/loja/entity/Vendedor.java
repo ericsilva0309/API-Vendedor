@@ -1,6 +1,7 @@
 package com.projeto.loja.entity;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,8 +13,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)//significa que cada classe da hierarquia terá sua propria tabela,
-											//e essas tabelas serão relacionadas por chaves estrangeiras.
+@Inheritance(strategy = InheritanceType.JOINED) 
+@Embeddable
 public class Vendedor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

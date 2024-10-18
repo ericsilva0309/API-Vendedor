@@ -9,6 +9,11 @@ public class VendedorAutonomo extends Vendedor{
 
 	
 	
+	public VendedorAutonomo(Double comissao) {
+		super();
+		this.comissao = comissao;
+	}
+
 	public Double getComissao() {
 		return comissao;
 	}

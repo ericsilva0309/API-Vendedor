@@ -15,35 +15,39 @@ import io.swagger.v3.oas.models.servers.Server;
 @Configuration
 public class OpenApiConfig {
 
+	//o value captura o valor entre 
+	//parenteses la do application.properties
 	@Value("${dominio.openapi.dev-url}")
 	private String devUrl;
+	
 	@Value("${dominio.openapi.prod-url}")
 	private String prodUrl;
-
+	
 	@Bean
 	public OpenAPI myOpenApi() {
+		//1)
 		Server devServer = new Server();
 		devServer.setUrl(devUrl);
 		devServer.setDescription("URL da área de desenvolvimento");
 		
 		Server prodServer = new Server();
 		prodServer.setUrl(prodUrl);
-		prodServer.setDescription("URL da área de Produção");
+		prodServer.setDescription("URL da área de produção");
 		
+		//2)
 		Contact contact = new Contact();
-		contact.setName("Roni Schanuel");
-		contact.setEmail("roni_inf@hotmail.com");
+		contact.setName("JMC");
+		contact.setEmail("j@mail.com");
 		contact.setUrl("https://www.serratec.com.br");
 		
-		License apacheLicense = new License().name("Apache")
-								.url("https://www.apache.org/licenses/LICENSE-2.0");
-		
+		//3)
+		License apacheLicense = new License().name("Apache").
+				url("https://opensource.org/licenses/Apache-2.0");
 		Info info = new Info().title("API DO SERRATEC").version("1.0").contact(contact)
-				.description("API PARA ESTUDOS").termsOfService("https://www.serratec.com.br")
+				.description("API PARA ESTUDOS J").termsOfService("https://www.serratec.com.br")
 				.license(apacheLicense);
-		
+		//4)
 		return new OpenAPI().info(info).servers(List.of(devServer,prodServer));
-		
+		//List.of() passa informações que não podem ser modificadas
 	}
-	
-}
+} 

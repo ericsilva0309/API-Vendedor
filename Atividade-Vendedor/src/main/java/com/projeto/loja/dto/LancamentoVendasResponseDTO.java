@@ -1,7 +1,6 @@
 package com.projeto.loja.dto;
 
-import java.time.LocalDate;
-
+ 
 import com.projeto.loja.entity.LancamentoVendas;
 
 public class LancamentoVendasResponseDTO {
